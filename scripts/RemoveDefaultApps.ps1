@@ -12,28 +12,18 @@ function removeApp {
 	Param ([string]$appName)
 	Write-Output "Trying to remove $appName"
 	Get-AppxPackage $appName -AllUsers | Remove-AppxPackage
-	Get-AppXProvisionedPackage -Online | Where DisplayNam -like $appName | Remove-AppxProvisionedPackage -Online
+	Get-AppXProvisionedPackage -Online | Where DisplayName -like $appName | Remove-AppxProvisionedPackage -Online
 }
 
 $applicationList = @(
-	"Microsoft.BingFinance"
 	"Microsoft.3DBuilder"
 	"Microsoft.BingFinance"
 	"Microsoft.BingNews"
 	"Microsoft.BingSports"
 	"Microsoft.BingWeather"
-	"Microsoft.CommsPhone"
 	"Microsoft.Getstarted"
-	"Microsoft.WindowsMaps"
-	"*MarchofEmpires*"
 	"Microsoft.GetHelp"
-	"Microsoft.Messaging"
-	"*Minecraft*"
 	"Microsoft.MicrosoftOfficeHub"
-	"Microsoft.OneConnect"
-	"Microsoft.WindowsPhone"
-	"Microsoft.WindowsSoundRecorder"
-	"*Solitaire*"
 	"Microsoft.MicrosoftStickyNotes"
 	"Microsoft.Office.Sway"
 	"Microsoft.XboxApp"
@@ -43,11 +33,15 @@ $applicationList = @(
 	"Microsoft.NetworkSpeedTest"
 	"Microsoft.FreshPaint"
 	"Microsoft.Print3D"
+	"*MarchofEmpires*"
+	"*Minecraft*"
+	"*Solitaire*"
+	   
+	# non-Microsoft
 	"*Autodesk*"
 	"*BubbleWitch*"
     "king.com*"
     "G5*"
-	"*Dell*"
 	"*Facebook*"
 	"*Keeper*"
 	"*Netflix*"
@@ -57,6 +51,43 @@ $applicationList = @(
 	"*.EclipseManager"
 	"ActiproSoftwareLLC.562882FEEB491" # Code Writer
 	"*.AdobePhotoshopExpress"
+	"PandoraMediaInc.29680B314EFC2"
+	"Flipboard.Flipboard"
+	"ShazamEntertainmentLtd.Shazam"
+	"king.com.CandyCrushSaga"
+	"king.com.CandyCrushSodaSaga"
+	"king.com.*"
+	"ClearChannelRadioDigital.iHeartRadio"
+	"6Wunderkinder.Wunderlist"
+	"Drawboard.DrawboardPDF"
+	"2FE3CB00.PicsArt-PhotoStudio"
+	"D52A8D61.FarmVille2CountryEscape"
+	"TuneIn.TuneInRadio"
+	"GAMELOFTSA.Asphalt8Airborne"
+	"DB6EA5DB.CyberLinkMediaSuiteEssentials"
+	"flaregamesGmbH.RoyalRevolt2"
+	"Playtika.CaesarsSlotsFreeCasino"
+	"A278AB0D.MarchofEmpires"
+	"KeeperSecurityInc.Keeper"
+	"ThumbmunkeysLtd.PhototasticCollage"
+	"XINGAG.XING"
+	"ActiproSoftwareLLC.562882FEEB491"
+	"*Dropbox*"
+		
+	# apps which cannot be removed using Remove-AppxPackage
+	#"Microsoft.BioEnrollment"
+	#"Microsoft.MicrosoftEdge"
+	#"Microsoft.Windows.Cortana"
+	#"Microsoft.WindowsFeedback"
+	#"Microsoft.XboxGameCallableUI"
+	#"Microsoft.XboxIdentityProvider"
+	#"Windows.ContactSupport"
+	#"Microsoft.OneConnect"
+	#"Microsoft.CommsPhone"
+	#"Microsoft.WindowsMaps"
+	#"Microsoft.Messaging"
+	#"Microsoft.WindowsPhone"
+	#"Microsoft.WindowsSoundRecorder"
 );
 
 foreach ($app in $applicationList) {

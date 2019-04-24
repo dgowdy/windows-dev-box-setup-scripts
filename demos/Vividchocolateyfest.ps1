@@ -26,33 +26,10 @@ function executeScript {
 #--- Setting up Windows ---
 executeScript "SystemConfiguration.ps1";
 executeScript "RemoveDefaultApps.ps1";
-#executeScript "FileExplorerSettings.ps1";
-#executeScript "Browsers.ps1";
+executeScript "FileExplorerSettings.ps1";
+executeScript "InstallApps.ps1";
 
-#executeScript "HyperV.ps1";
 RefreshEnv
-
-### HACK Workaround choco / boxstarter path too long error
-## https://github.com/chocolatey/boxstarter/issues/241
-New-Item -Path "$env:userprofile\AppData\Local\Temp\ChocoCache" -ItemType directory -Force | Out-Null
-$ChocoCachePath = "--cacheLocation=`"$env:userprofile\AppData\Local\Temp\ChocoCache`""
-
-#--- Windows Subsystems/Features ---
-cinst -y NetFx3 -source windowsfeatures
-
-#--- Tools ---
-cinst -y 7zip.install $ChocoCachePath
-cinst -y notepadplusplus.install $ChocoCachePath
-cinst -y sysinternals --params="'/InstallDir:C:\Vivid\Sysinternals'" $ChocoCachePath
-cinst -y treesizefree $ChocoCachePath
-
-#--- Apps ---
-cinst -y adobereader $ChocoCachePath
-cinst -y googlechrome $ChocoCachePath
-cinst -y putty.install $ChocoCachePath
-
-# personalize
-#choco install -y office365business
 
 #--- Windows Settings ---
 Set-WindowsExplorerOptions -EnableShowFileExtensions -EnableShowHiddenFilesFoldersDrives -EnableExpandToOpenFolder -DisableOpenFileExplorerToQuickAccess -DisableShowFrequentFoldersInQuickAccess -DisableShowRecentFilesInQuickAccess
@@ -66,4 +43,4 @@ TZUTIL /s "Eastern Standard Time"
 
 Enable-UAC
 Enable-MicrosoftUpdate
-Install-WindowsUpdate -acceptEula
+#Install-WindowsUpdate -acceptEula
