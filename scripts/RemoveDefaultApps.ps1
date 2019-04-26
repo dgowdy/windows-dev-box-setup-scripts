@@ -36,12 +36,12 @@ $applicationList = @(
 	"*MarchofEmpires*"
 	"*Minecraft*"
 	"*Solitaire*"
-	   
+
 	# non-Microsoft
 	"*Autodesk*"
 	"*BubbleWitch*"
-    "king.com*"
-    "G5*"
+	"king.com*"
+	"G5*"
 	"*Facebook*"
 	"*Keeper*"
 	"*Netflix*"
@@ -73,7 +73,7 @@ $applicationList = @(
 	"XINGAG.XING"
 	"ActiproSoftwareLLC.562882FEEB491"
 	"*Dropbox*"
-		
+
 	# apps which cannot be removed using Remove-AppxPackage
 	#"Microsoft.BioEnrollment"
 	#"Microsoft.MicrosoftEdge"
