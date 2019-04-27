@@ -6,9 +6,9 @@ choco feature enable -n useRememberedArgumentsForUpgrades
 New-Item -Path "$env:userprofile\AppData\Local\Temp\ChocoCache" -ItemType directory -Force | Out-Null
 $ChocoCachePath = "--cacheLocation=`"$env:userprofile\AppData\Local\Temp\ChocoCache`""
 
-# tools we expect devs across many scenarios will want
+# Standard tools most customers will want
 #--- Windows Subsystems/Features ---
-cinst -y NetFx3 -source windowsfeatures
+choco install -y NetFx3 -source windowsfeatures
 
 #--- Tools ---
 choco upgrade -y 7zip.install $ChocoCachePath
@@ -19,7 +19,6 @@ choco upgrade -y treesizefree $ChocoCachePath
 #--- Apps ---
 choco upgrade -y adobereader $ChocoCachePath
 choco upgrade -y googlechrome $ChocoCachePath
-choco upgrade -y putty.install $ChocoCachePath
 
 # personalize
 #choco install -y office365business
