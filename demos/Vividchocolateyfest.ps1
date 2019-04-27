@@ -3,6 +3,7 @@
 # chocolatey fest demo
 #
 # https://boxstarter.org/package/url?https://raw.githubusercontent.com/dgowdy/windows-dev-box-setup-scripts/master/demos/Vividchocolateyfest.ps1
+# http://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/dgowdy/windows-dev-box-setup-scripts/master/demos/Vividchocolateyfest.ps1
 
 Disable-UAC
 $ConfirmPreference = "None" #ensure installing powershell modules don't prompt on needed dependencies
