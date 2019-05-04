@@ -14,9 +14,9 @@ Set-WindowsExplorerOptions `
 
 #--- File Explorer Settings ---
 # Adds things back in your left pane like recycle bin
-Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name NavPaneShowAllFolders -Value 1
+#Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "NavPaneShowAllFolders" -Value 1
 # Taskbar where window is open for multi-monitor
-Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name MMTaskbarMode -Value 2
+#Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "MMTaskbarMode" -Value 2
 
 # Hide 3D Objects icon from Explorer namespace - Hides the icon also from personal folders and open/save dialogs
 Write-Host "Hiding 3D Objects icon from Explorer namespace..."

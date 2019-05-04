@@ -24,11 +24,14 @@ $applicationList = @(
     "Microsoft.FreshPaint"
     "Microsoft.GetHelp"
     "Microsoft.Getstarted"
+    "Microsoft.Microsoft3DViewer"
     "Microsoft.MicrosoftOfficeHub"
     "Microsoft.MicrosoftStickyNotes"
     "Microsoft.NetworkSpeedTest"
     "Microsoft.Office.Sway"
+    "Microsoft.OneConnect"
     "Microsoft.Print3D"
+    "Microsoft.SkypeApp"
     "Microsoft.XboxApp"
     "Microsoft.XboxIdentityProvider"
     "Microsoft.ZuneMusic"
@@ -53,9 +56,10 @@ $applicationList = @(
     "PandoraMediaInc.29680B314EFC2"
     "Flipboard.Flipboard"
     "ShazamEntertainmentLtd.Shazam"
+    "king.com.CandyCrushFriends"
     "king.com.CandyCrushSaga"
     "king.com.CandyCrushSodaSaga"
-    "king.com.*"
+    "*king.com.*"
     "ClearChannelRadioDigital.iHeartRadio"
     "6Wunderkinder.Wunderlist"
     "Drawboard.DrawboardPDF"
@@ -72,13 +76,14 @@ $applicationList = @(
     "XINGAG.XING"
     "ActiproSoftwareLLC.562882FEEB491"
     "*Dropbox*"
+    "*COOKINGFEVER*"
+    "*Spotify*"
 
     # apps which cannot be removed using Remove-AppxPackage
     #"Microsoft.BioEnrollment"
     #"Microsoft.CommsPhone"
     #"Microsoft.Messaging"
     #"Microsoft.MicrosoftEdge"
-    #"Microsoft.OneConnect"
     #"Microsoft.Windows.Cortana"
     #"Microsoft.WindowsFeedback"
     #"Microsoft.WindowsMaps"
@@ -94,7 +99,7 @@ foreach ($app in $applicationList) {
 }
 
 # To prevent these apps from reappearing at the next update, create a registry key for each app, then update the computer.
-# Remove the registry keys belonging to the apps you want to keep. 
+# Remove the registry keys belonging to the apps you want to keep.
 # For example, if you want to keep the Bing Weather app, delete it's registry key:
 
 $Deprovisioned = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore\Deprovisioned"
@@ -104,7 +109,7 @@ If (-Not (Test-Path -Path $Deprovisioned)) {
 
 # Block Apps
 $blockapps = @(
-    
+
     # Microsoft Apps
     "Microsoft.BingWeather_4.28.10351.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.GetHelp_10.1706.20381.0_neutral_~_8wekyb3d8bbwe"
@@ -115,11 +120,11 @@ $blockapps = @(
     "Microsoft.MicrosoftStickyNotes_3.1.55.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.MSPaint_2019.408.1721.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.Office.OneNote_16001.11601.20066.0_neutral_~_8wekyb3d8bbwe"
+    "Microsoft.OneConnect_5.1902.361.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.People_2019.305.632.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.Print3D_3.3.791.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.SkypeApp_14.42.60.0_neutral_~_kzf8qxf38zg5c"
     "Microsoft.Wallet_2.1.18009.0_neutral_~_8wekyb3d8bbwe"
-    "Microsoft.WebMediaExtensions_1.0.13321.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.Windows.Photos_2019.19021.18010.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.WindowsCamera_2019.124.60.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.WindowsFeedbackHub_2019.327.1732.0_neutral_~_8wekyb3d8bbwe"
@@ -130,10 +135,9 @@ $blockapps = @(
     "Microsoft.XboxIdentityProvider_12.46.25001.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.XboxSpeechToTextOverlay_1.21.13002.0_neutral_~_8wekyb3d8bbwe"
     "Microsoft.ZuneMusic_2019.19031.11411.0_neutral_~_8wekyb3d8bbwe"
-    "Microsoft.ZuneVideo_2019.19031.11411.0_neutral_~_8wekyb3d8bbwe"        
+    "Microsoft.ZuneVideo_2019.19031.11411.0_neutral_~_8wekyb3d8bbwe"
 
     # apps which cannot be blocked
-    #"Microsoft.OneConnect_5.1902.361.0_neutral_~_8wekyb3d8bbwe"
     #"Microsoft.StorePurchaseApp_11811.1001.1813.0_neutral_~_8wekyb3d8bbwe"
     #"Microsoft.WindowsAlarms_2019.305.627.0_neutral_~_8wekyb3d8bbwe"
     #"Microsoft.WindowsCalculator_10.1902.42.0_neutral_~_8wekyb3d8bbwe"
@@ -144,7 +148,13 @@ $blockapps = @(
     #"Microsoft.DesktopAppInstaller_8wekyb3d8bbwe"
 );
 
+
+ForEach ($app in $blockapps) {
+    Get-AppxPackage -AllUsers | where { $_.PackageFamilyName -like $app } | Select PackageFamilyName
+
+}
 foreach ($app in $blockapps) {
     Write-Output "Trying to block $app"
     New-Item -Path $Deprovisioned\$app -Force | Out-Null
 }
+

@@ -8,6 +8,9 @@
 Disable-UAC
 $ConfirmPreference = "None" #ensure installing powershell modules don't prompt on needed dependencies
 
+# Use Remembered Arguments For Upgrade
+choco feature enable -n useRememberedArgumentsForUpgrades
+
 ### HACK Workaround choco / boxstarter path too long error
 ## https://github.com/chocolatey/boxstarter/issues/241
 $ChocoCachePath = "$env:USERPROFILE\AppData\Local\ChocoCache"
@@ -48,7 +51,6 @@ Set-StartScreenOptions -EnableBootToDesktop -EnableDesktopBackgroundOnStart -Ena
 Disable-BingSearch
 Disable-GameBarTips
 Enable-RemoteDesktop
-TZUTIL /s "Eastern Standard Time"
 
 
 Enable-UAC
